@@ -1,0 +1,45 @@
+form
+  .form-group
+    label Nome:
+    input.form-control(name='nome',
+                        data-ng-model='cliente.nome')
+  .form-group
+      label Telefone:
+      input.form-control(name='telefone',
+                          data-ng-model='cliente.telefone')
+
+  .form-group
+      label Email:
+      input.form-control(name='email',
+                          data-ng-model='cliente.email')
+
+  .form-group
+      label Observação:
+      input.form-control(name='observacao',
+                          data-ng-model='cliente.observacao')
+
+  hr
+  .form-group
+      label Logradouro:
+      input.form-control(name='logradouro',
+                          data-ng-model='cliente.endereco.logradouro')
+
+  .form-group
+      label Complemento:
+      input.form-control(name='complemento',
+                          data-ng-model='cliente.endereco.complemento')
+
+  .form-group
+      label Bairro:
+      input.form-control(name='bairro',
+                          data-ng-model='cliente.endereco.bairro')
+
+  .form-group
+      label Cidade:
+      input.form-control(name='cidade',
+                          data-ng-model='cliente.endereco.cidade')
+
+  .form-group
+      label Estado:
+      input.form-control(name='estado',
+                          data-ng-model='cliente.endereco.estado')

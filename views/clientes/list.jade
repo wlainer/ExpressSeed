@@ -1,0 +1,13 @@
+h3.title List of Clientes
+p.message {{message}}
+
+ul
+  li(data-ng-repeat='cliente in clientes')
+    {{ cliente.nome }}
+    a(href='/clientes/{{cliente._id}}/edit')
+      | Edit
+    a(href='/clientes/{{cliente._id}}/remove')
+      | Remover
+
+
+

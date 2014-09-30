@@ -3,17 +3,16 @@ var express = require('express'),
   methodOverride = require('method-override'),
   errorHandler = require('errorhandler'),
   morgan = require('morgan'),
+  api = require('./routes/api'),
   routes = require('./routes'),
   partials = require('./routes/partials'),
-  db = require('./models/db');
-  api = require('./routes/api'),
+  db = require('./models/db'),
+  expose = require('./routes/expose'),
   http = require('http'),
   path = require('path');
 
 var app = module.exports = express();
 
-var api = {};
-api.name = require('./routes/api');
 api.cliente = require('./routes/api/cliente');
 
 /**
@@ -24,8 +23,11 @@ api.cliente = require('./routes/api/cliente');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.locals.pretty = true;
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,20 +44,20 @@ if (env === 'production') {
   // TODO
 }
 
-
 /**
  * Routes
  */
 
-// serve index  
+// serve index
 app.use('/', routes);
 
 // server view partials
 app.use('/partials', partials);
+app.use('/expose', expose);
 
 // JSON API
-app.use('/api/cliente', api.cliente);
-app.use('/api', api.name);
+app.use('/api/clientes', api.cliente);
+app.use('/api', api);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', function(req, res, next) {
@@ -67,23 +69,23 @@ app.get('*', function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;

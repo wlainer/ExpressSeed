@@ -8,19 +8,27 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.directives'
 ]).
-config(function ($routeProvider, $locationProvider) {
+config(function($routeProvider, $locationProvider) {
   $routeProvider.
-    when('/view1', {
-      templateUrl: 'partials/partial1',
-      controller: 'MyCtrl1'
-    }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
-      controller: 'MyCtrl2'
-    }).
-    otherwise({
-      redirectTo: '/view1'
-    });
+  when('/clientes/add', {
+    templateUrl: 'expose/clientes/create',
+    controller: 'ClienteCreateController'
+  }).
+  when('/clientes/:id/edit', {
+    templateUrl: 'expose/clientes/edit',
+    controller: 'ClienteEditController'
+  }).
+  when('/clientes/:id/remove', {
+    templateUrl: 'expose/clientes/remove',
+    controller: 'ClienteRemoveController'
+  }).
+  when('/clientes', {
+    templateUrl: 'expose/clientes/list',
+    controller: 'ClienteListController'
+  }).
+  otherwise({
+    redirectTo: '/clientes'
+  });
 
   $locationProvider.html5Mode(true);
 });
