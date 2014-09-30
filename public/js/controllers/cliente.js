@@ -81,8 +81,6 @@ controller('ClienteListController', ['$scope', '$http', 'ClienteService',
     function($scope, $http, $routeParams) {
 
       var id = $routeParams.id;
-
-
       var url = 'api/clientes/_id/' + id;
       var method = 'GET';
 
