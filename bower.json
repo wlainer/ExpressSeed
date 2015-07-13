@@ -1,0 +1,19 @@
+{
+  "name": "ExpressSeed",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wlainer/ExpressSeed",
+  "authors": [
+    "Wlainer Ribeiro <wlainer@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

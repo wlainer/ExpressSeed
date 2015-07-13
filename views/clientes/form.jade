@@ -1,90 +1,81 @@
-form
+form(name="clienteForm", novalidate)
   .form-group
     label Nome:
-    input.form-control(name='nome',
-                        data-ng-model='cliente.nome')
+    input.form-control(name='nome', ng-model='cliente.nome', required)
+    span(ng-show="clienteForm.nome.$invalid && !clienteForm.nome.$pristine", class="help-block") You name is required.
   .form-group
       label Telefone:
-      input.form-control(name='telefone',
-                          data-ng-model='cliente.telefone')
-
+      input.form-control(name='telefone', ng-model='cliente.telefone')
   .form-group
       label Email:
-      input.form-control(name='email',
-                          data-ng-model='cliente.email')
-
+      input.form-control(type="email", name='email', ng-model='cliente.email')
   .form-group
       label Observação:
-      input.form-control(name='observacao',
-                          data-ng-model='cliente.observacao')
+      input.form-control(name='observacao', ng-model='cliente.observacao')
 
   hr
 
   .form-group
       label Logradouro:
-      input.form-control(name='logradouro',
-                          data-ng-model='cliente.endereco.logradouro')
+      input.form-control(name='logradouro', ng-model='cliente.endereco.logradouro')
 
   .form-group
       label Complemento:
-      input.form-control(name='complemento',
-                          data-ng-model='cliente.endereco.complemento')
+      input.form-control(name='complemento', ng-model='cliente.endereco.complemento')
 
   .form-group
       label Bairro:
-      input.form-control(name='bairro',
-                          data-ng-model='cliente.endereco.bairro')
+      input.form-control(name='bairro', ng-model='cliente.endereco.bairro')
 
   .form-group
       label Cidade:
-      input.form-control(name='cidade',
-                          data-ng-model='cliente.endereco.cidade')
+      input.form-control(name='cidade', ng-model='cliente.endereco.cidade')
 
   .form-group
       label Estado:
-      input.form-control(name='estado',
-                          data-ng-model='cliente.endereco.estado')
+      input.form-control(name='estado', ng-model='cliente.endereco.estado')
 
   hr
 
-  table
-    thead
-      tr
-        td #
-        td nome
-        td email
-        td telefone
-        td setor
-        td alterar
-        td remove
+  div
+    table
+      thead
+        tr
+          td #
+          td nome
+          td email
+          td telefone
+          td setor
+          td alterar
+          td remove
 
-    tbody(ng-repeat="contato in cliente.contato")
-      tr
-        td {{ $index }}
-        td {{ contato.nome }}
-        td {{ contato.email }}
-        td {{ contato.telefone }}
-        td {{ contato.setor }}
-        td
-          button(ng-click="editContact($index)") alterar
-        td
-          button(ng-click="removeContact($index)") remove
+      tbody(ng-repeat="contato in cliente.contato")
+        tr
+          td {{ $index }}
+          td {{ contato.nome }}
+          td {{ contato.email }}
+          td {{ contato.telefone }}
+          td {{ contato.setor }}
+          td
+            button(ng-click="editContact($index)") alterar
+          td
+            button(ng-click="removeContact($index)") remove
 
 
-  button#btnAddContact(ng-click="showContact = !showContact") Contatos
+  button#btnShowContact(ng-click="showContact = !showContact") Contatos
 
   div#contacts(ng-show="showContact")
     .form-group
        label Nome:
-       input.form-control(name='nome', data-ng-model='contact.nome')
+       input.form-control(name='nome', ng-model='contact.nome')
     .form-group
        label Email:
-       input.form-control(name='email', data-ng-model='contact.email')
+       input.form-control(name='email', ng-model='contact.email')
     .form-group
        label Telefone:
-       input.form-control(name='telefone', data-ng-model='contact.telefone')
+       input.form-control(name='telefone', ng-model='contact.telefone')
     .form-group
        label Setor:
-       input.form-control(name='setor', data-ng-model='contact.setor')
+       input.form-control(name='setor', ng-model='contact.setor')
 
     button#btnAddContact(ng-click="addContact()") Adicionar

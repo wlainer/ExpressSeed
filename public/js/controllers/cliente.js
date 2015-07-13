@@ -1,7 +1,6 @@
 'use strict';
 
 // Helpers
-
 var removerItem = function(arr, item) {
    var index = arr.indexOf(item);
    if (index > -1) {
@@ -20,39 +19,27 @@ var cbFindError = function(error, $scope) {
 
 // Controllers
 angular.module('controllers.Clientes', []).
-controller('ClienteCreateController', ['$scope', '$http',
-   function($scope, $http) {
-
-      var url = 'api/cliente/';
-      var method = 'POST';
-
+controller('ClienteCreateController', ['$scope', '$http', 'ClienteService',
+   function($scope, $http, ClienteService) {
       $scope.message = 'Create Cliente';
       $scope.showContact = false;
 
-      $scope.addContact = function() {
-         $scope.showContact = !$scope.showContact;
-         if ($scope.showContact) {
-            cliente.contato = [];
+      $scope.submitForm = function(isValid) {
+         if (isValid) {
+            ClienteService.add($scope.cliente).then(
+               function(data) {
+                  console.log(data);
+                  $scope.data = data;
+                  $scope.message = 'Cliente ' + cliente.nome + ' cadastrado com sucesso';
+               },
+               function(err) {
+                  console.log(err);
+                  $scope.message = 'Cliente não pode ser cadastrado';
+               });
+         } else {
+            $scope.message = 'An error occurred while adding a new client';
          }
-      }
-
-      $scope.create = function(cliente) {
-         $http({
-            url: url,
-            method: method,
-            data: cliente
-         }).
-         success(function(data) {
-            console.log(data);
-            $scope.data = data;
-            $scope.msg = 'Cliente ' + cliente.nome + ' cadastrado com sucesso';
-         }).
-         error(function(err) {
-            console.log(err);
-            $scope.msg = 'Cliente não pode ser cadastrado';
-         });
       };
-
    }
 ]).
 controller('ClienteListController', ['$scope', '$http', 'ClienteService',
