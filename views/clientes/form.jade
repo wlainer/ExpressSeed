@@ -19,6 +19,7 @@ form
                           data-ng-model='cliente.observacao')
 
   hr
+
   .form-group
       label Logradouro:
       input.form-control(name='logradouro',
@@ -43,3 +44,47 @@ form
       label Estado:
       input.form-control(name='estado',
                           data-ng-model='cliente.endereco.estado')
+
+  hr
+
+  table
+    thead
+      tr
+        td #
+        td nome
+        td email
+        td telefone
+        td setor
+        td alterar
+        td remove
+
+    tbody(ng-repeat="contato in cliente.contato")
+      tr
+        td {{ $index }}
+        td {{ contato.nome }}
+        td {{ contato.email }}
+        td {{ contato.telefone }}
+        td {{ contato.setor }}
+        td
+          button(ng-click="editContact($index)") alterar
+        td
+          button(ng-click="removeContact($index)") remove
+
+
+  button#btnAddContact(ng-click="showContact = !showContact") Contatos
+
+  div#contacts(ng-show="showContact")
+    .form-group
+       label Nome:
+       input.form-control(name='nome', data-ng-model='contact.nome')
+    .form-group
+       label Email:
+       input.form-control(name='email', data-ng-model='contact.email')
+    .form-group
+       label Telefone:
+       input.form-control(name='telefone', data-ng-model='contact.telefone')
+    .form-group
+       label Setor:
+       input.form-control(name='setor', data-ng-model='contact.setor')
+
+    button#btnAddContact(ng-click="addContact()") Adicionar
